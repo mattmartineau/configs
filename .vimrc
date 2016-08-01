@@ -12,7 +12,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -131,8 +131,9 @@ nnoremap <C-K> <C-W>k<CR>
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>s :sp<CR>
 
-" YCM config file
+" YCM config file confirmation ignore
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_extra_conf.py'
 
 " Stops the preview window keep opening all the time
 autocmd CompleteDone * pclose
@@ -150,6 +151,7 @@ au BufRead,BufNewFile *.knls set filetype=cpp
 au BufRead,BufNewFile *.ptx set filetype=asm
 
 syn enable
+
 
 " Coloring with solarized theme
 set background=dark

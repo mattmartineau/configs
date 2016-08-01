@@ -41,12 +41,11 @@ flags = [
 '-Wc++98-compat',
 '-Wno-long-long',
 '-Wno-variadic-macros',
-'-std=c99',
+'-std=c++11',
 '-openmp',
-'-x', 'c',
+'-x', 'c++',
 '-I', '.',
-'-isystem', '/usr/include/',
-'-I', '/opt/local/include/openmpi-mp/'
+'-isystem', '/usr/include/'
 ]
 
 
