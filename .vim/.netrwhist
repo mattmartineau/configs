@@ -1,0 +1,3 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/localhd/mattmar/kernels_o/omp4/27pt_stencil_performance'
