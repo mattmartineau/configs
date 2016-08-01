@@ -55,3 +55,4 @@ export PATH=/usr/local/cuda/bin/:$PATH
 export CUDA_PATH=/usr/local/cuda
 alias ctags=/compteam/mattmar/ctags/bin/ctags
 
+alias vim=/compteam/mattmar/vim/bin/vim
