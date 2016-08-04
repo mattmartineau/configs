@@ -45,7 +45,9 @@ flags = [
 '-openmp',
 '-x', 'c++',
 '-I', '.',
-'-isystem', '/usr/include/'
+'-isystem', '/usr/include/',
+'-I', '/localhd/mattmar/lomp/lomp/source/',
+'-I', '/usr/local/cuda/include/'
 ]
 
 

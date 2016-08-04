@@ -8,10 +8,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
-Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-surround'
 "Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
@@ -115,21 +117,18 @@ imap jk <Esc>
 
 " Miscellaneous
 map Q gq
-vnoremap <leader>p "0p
 inoremap <C-U> <C-G>u<C-U>
-vnoremap <leader>q :ctags -R
 
 " Highlight a column for width limiting
 set colorcolumn=83
 hi ColorColumn ctermbg=lightgrey
 
 " Moving around buffers
-nnoremap <C-H> <C-W>h<CR>
-nnoremap <C-L> <C-W>l<CR>
-nnoremap <C-J> <C-W>j<CR>
-nnoremap <C-K> <C-W>k<CR>
-nnoremap <leader>v :vsp<CR>
-nnoremap <leader>s :sp<CR>
+nnoremap <C-H> <C-W>h
+nnoremap <C-L> <C-W>l
+nnoremap <C-J> 5j
+nnoremap <C-K> 5k
+nnoremap H gJ
 
 " YCM config file confirmation ignore
 let g:ycm_confirm_extra_conf = 0
@@ -150,8 +149,23 @@ au BufRead,BufNewFile *.cu set filetype=cpp
 au BufRead,BufNewFile *.knls set filetype=cpp
 au BufRead,BufNewFile *.ptx set filetype=asm
 
-syn enable
+" Permanent undo files
+set undofile
+set undodir="$HOME/.vim_undo/"
 
+" Disable ex mode
+nnoremap Q <nop>
+
+" Nifty
+nnoremap ; :
+
+inoremap {<CR> {<C-o>o}<C-o>O
+
+" Set cursor line
+set cursorline
+
+" Enable syntax highlighting
+syn enable
 
 " Coloring with solarized theme
 set background=dark
@@ -161,7 +175,27 @@ colorscheme mmartineau
 set ignorecase
 set smartcase
 
+" Make tab completion like in bash
+set wildmode=longest,list,full
+set wildmenu
+
 " Make shell open .profile at launch
 set shell=/bin/bash\ -l
 
+" Quick jump to shell
+nnoremap <leader>d :sh<CR>
+vnoremap <leader>p "0p
+vnoremap <leader>q :ctags -R
+nnoremap <leader>v :vsp<CR>
+nnoremap <leader>s :sp<CR>
+nnoremap <leader>g :YcmCompleter GoTo<CR>
+
+" Recurse up for tags file
+nnoremap <leader>a ma
+nnoremap <leader>c o#endif // if 0<ESC>'aO#if 0<ESC>
+
+" Disable youcompleteme
+" let g:loaded_youcompleteme = 1
+
 " ~/.vimrc ends here
+"
