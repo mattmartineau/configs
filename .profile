@@ -4,10 +4,10 @@ export LLREPOS=/gsa/yktgsa/projects/l/llvm/
 test -s ~/.alias && . ~/.alias || true
 
 # Use different command line if within VIM shell.
-if env | grep -q ^VIM_RUNTIME=; then
-  export PS1="\[\033[1;31m\]\w (\u@\h) *VIM* \n\[\033[1;30m\] >\[\033[0;30m\] ";
-else
+if [ -z "$VIMRUNTIME" ]; then
   export PS1="\[\033[1;31m\]\w (\u@\h) \n\[\033[1;30m\] >\[\033[0;30m\] ";
+else
+  export PS1="\[\033[1;31m\]\w (\u@\h) *VIM* \n\[\033[1;30m\] >\[\033[0;30m\] ";
 fi
 
 export CLICOLOR=1
@@ -34,6 +34,15 @@ alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable 
 alias mcm='make clean; make -j 4'
 alias delcache="find . -name '*~' -type f -delete"
 
+# To fix screen colors
+export TERM=screen-256color
+
+# Key bindings, up/down arrow searches through history
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\eOA": history-search-backward'
+bind '"\eOB": history-search-forward'
+
 export PATH=/localhd/mattmar/scripts/:$PATH
 
 # Get the profile for LSF
@@ -54,5 +63,4 @@ export LOMP_DEBUG=none
 export PATH=/usr/local/cuda/bin/:$PATH
 export CUDA_PATH=/usr/local/cuda
 alias ctags=/compteam/mattmar/ctags/bin/ctags
-
 alias vim=/compteam/mattmar/vim/bin/vim

@@ -123,13 +123,6 @@ inoremap <C-U> <C-G>u<C-U>
 set colorcolumn=83
 hi ColorColumn ctermbg=lightgrey
 
-" Moving around buffers
-nnoremap <C-H> <C-W>h
-nnoremap <C-L> <C-W>l
-nnoremap <C-J> 5j
-nnoremap <C-K> 5k
-nnoremap H gJ
-
 " YCM config file confirmation ignore
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_extra_conf.py'
@@ -190,9 +183,23 @@ nnoremap <leader>v :vsp<CR>
 nnoremap <leader>s :sp<CR>
 nnoremap <leader>g :YcmCompleter GoTo<CR>
 
+" For comedy
+nnoremap <leader>t i#pragma omp target teams distribute parallel for
+
 " Recurse up for tags file
 nnoremap <leader>a ma
 nnoremap <leader>c o#endif // if 0<ESC>'aO#if 0<ESC>
+
+" Moving around buffers
+nnoremap <C-H> <C-W>h
+nnoremap <C-L> <C-W>l
+nnoremap <C-J> 5j
+nnoremap <C-K> 5k
+nnoremap H :w<CR>:bp<CR>
+nnoremap L :w<CR>:bn<CR>
+
+" Ignore the warnings through make
+set errorformat^=%-G%f:%l:\ warning:%m
 
 " Disable youcompleteme
 " let g:loaded_youcompleteme = 1
