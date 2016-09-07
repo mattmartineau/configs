@@ -8,11 +8,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 "Plugin 'bling/vim-airline'
 
@@ -74,6 +74,16 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
+" Stops the preview window keep opening all the time
+autocmd CompleteDone * pclose
+       
+" Setup special file highlighting
+au BufRead,BufNewFile *.cl set filetype=c
+au BufRead,BufNewFile *.cuknl set filetype=cpp
+au BufRead,BufNewFile *.cu set filetype=cpp
+au BufRead,BufNewFile *.knls set filetype=cpp
+au BufRead,BufNewFile *.ptx set filetype=asm
+
 set mouse=a
 set hlsearch
 set tabstop=2
@@ -127,20 +137,10 @@ hi ColorColumn ctermbg=lightgrey
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_extra_conf.py'
 
-" Stops the preview window keep opening all the time
-autocmd CompleteDone * pclose
-        
 " Some Fortran code folding improvements
 let fortran_do_enddo=1
 let fortran_more_precise=1
 let fortran_have_tabs=1
-
-" Setup special file highlighting
-au BufRead,BufNewFile *.cl set filetype=c
-au BufRead,BufNewFile *.cuknl set filetype=cpp
-au BufRead,BufNewFile *.cu set filetype=cpp
-au BufRead,BufNewFile *.knls set filetype=cpp
-au BufRead,BufNewFile *.ptx set filetype=asm
 
 " Permanent undo files
 set undofile
@@ -153,9 +153,6 @@ nnoremap Q <nop>
 nnoremap ; :
 
 inoremap {<CR> {<C-o>o}<C-o>O
-
-" Set cursor line
-set cursorline
 
 " Enable syntax highlighting
 syn enable
@@ -198,11 +195,19 @@ nnoremap <C-K> 5k
 nnoremap H :w<CR>:bp<CR>
 nnoremap L :w<CR>:bn<CR>
 
+set nocursorcolumn
+set nocursorline
+set norelativenumber
+"syntax sync minlines=256
+
 " Ignore the warnings through make
 set errorformat^=%-G%f:%l:\ warning:%m
 
+nnoremap <leader>f :set foldmethod=syntax<CR>:set foldnestmax=1<CR>
+
 " Disable youcompleteme
-" let g:loaded_youcompleteme = 1
+"let g:loaded_youcompleteme = 1
 
 " ~/.vimrc ends here
+"
 "
