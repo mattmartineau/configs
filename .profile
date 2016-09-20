@@ -1,6 +1,5 @@
 export EDITOR=/usr/bin/vim
 
-export LLREPOS=/gsa/yktgsa/projects/l/llvm/ 
 test -s ~/.alias && . ~/.alias || true
 
 # Use different command line if within VIM shell.
@@ -43,24 +42,3 @@ bind '"\e[B": history-search-forward'
 bind '"\eOA": history-search-backward'
 bind '"\eOB": history-search-forward'
 
-export PATH=/localhd/mattmar/scripts/:$PATH
-
-# Get the profile for LSF
-source /shared/lsf/conf/profile.lsf
-
-if [[ $HOSTNAME == *tulgb* ]]; then
-  export PATH=/shared/compteam/opt/tigervnc/bin:/shared/compteam/opt/eclipse/:$PATH
-  export LD_LIBRARY_PATH=/shared/compteam/opt/clang-build/3.6-libcxx/lib/:/usr/lib/powerpc64le-linux-gnu/mesa/:$LD_LIBRARY_PATH
-fi
-
-export MM=/localhd/mattmar/
-export CG=$MM/trunk/src/tools/clang/lib/CodeGen/
-export LH=/localhd/mattmar/
-
-export LD_LIBRARY_PATH=/localhd/mattmar/lomp/lomp/source/lib64/:$LD_LIBRARY_PATH
-export LIBRARY_PATH=/localhd/mattmar/trunk/obj/lib/:$LIBRARY_PATH
-export LOMP_DEBUG=none
-export PATH=/usr/local/cuda/bin/:$PATH
-export CUDA_PATH=/usr/local/cuda
-alias ctags=/compteam/mattmar/ctags/bin/ctags
-alias vim=/compteam/mattmar/vim/bin/vim
