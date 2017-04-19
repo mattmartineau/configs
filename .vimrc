@@ -180,6 +180,9 @@ nnoremap <leader>v :vsp<CR>
 nnoremap <leader>s :sp<CR>
 nnoremap <leader>g :YcmCompleter GoTo<CR>
 
+" Better highlighting of results
+highlight Search ctermbg=black ctermfg=yellow cterm=underline
+
 " For comedy
 nnoremap <leader>t i#pragma omp target teams distribute parallel for
 
