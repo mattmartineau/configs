@@ -188,7 +188,7 @@ nnoremap <leader>t i#pragma omp target teams distribute parallel for
 
 " Recurse up for tags file
 nnoremap <leader>a ma
-nnoremap <leader>c o#endif // if 0<ESC>'aO#if 0<ESC>
+nnoremap <leader>c o<ESC>^Da#endif // if 0<ESC>'aI#if 0<CR><ESC>
 
 " Moving around buffers
 nnoremap <C-H> <C-W>h
