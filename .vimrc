@@ -8,13 +8,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'godlygeek/tabular'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'kien/ctrlp.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-"Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-dispatch'
+Plugin 'vim-airline/vim-airline'
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -74,16 +75,6 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
-" Stops the preview window keep opening all the time
-autocmd CompleteDone * pclose
-       
-" Setup special file highlighting
-au BufRead,BufNewFile *.cl set filetype=c
-au BufRead,BufNewFile *.cuknl set filetype=cpp
-au BufRead,BufNewFile *.cu set filetype=cpp
-au BufRead,BufNewFile *.knls set filetype=cpp
-au BufRead,BufNewFile *.ptx set filetype=asm
-
 set mouse=a
 set hlsearch
 set tabstop=2
@@ -137,10 +128,20 @@ hi ColorColumn ctermbg=lightgrey
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_extra_conf.py'
 
+" Stops the preview window keep opening all the time
+autocmd CompleteDone * pclose
+        
 " Some Fortran code folding improvements
 let fortran_do_enddo=1
 let fortran_more_precise=1
 let fortran_have_tabs=1
+
+" Setup special file highlighting
+au BufRead,BufNewFile *.cl set filetype=c
+au BufRead,BufNewFile *.cuknl set filetype=cpp
+au BufRead,BufNewFile *.cu set filetype=cpp
+au BufRead,BufNewFile *.knls set filetype=cpp
+au BufRead,BufNewFile *.ptx set filetype=asm
 
 " Permanent undo files
 set undofile
@@ -153,6 +154,9 @@ nnoremap Q <nop>
 nnoremap ; :
 
 inoremap {<CR> {<C-o>o}<C-o>O
+
+" Set cursor line
+"set cursorline
 
 " Enable syntax highlighting
 syn enable
@@ -169,9 +173,6 @@ set smartcase
 set wildmode=longest,list,full
 set wildmenu
 
-" Make shell open .profile at launch
-set shell=/bin/bash\ -l
-
 " Quick jump to shell
 nnoremap <leader>d :sh<CR>
 vnoremap <leader>p "0p
@@ -179,8 +180,9 @@ vnoremap <leader>q :ctags -R
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>s :sp<CR>
 nnoremap <leader>g :YcmCompleter GoTo<CR>
+nnoremap <leader>f :FormatCode<CR>
 
-" Better highlighting of results
+" Better highlighting
 highlight Search ctermbg=black ctermfg=yellow cterm=underline
 
 " For comedy
@@ -188,7 +190,9 @@ nnoremap <leader>t i#pragma omp target teams distribute parallel for
 
 " Recurse up for tags file
 nnoremap <leader>a ma
-nnoremap <leader>c o#endif // if 0<ESC>'aO#if 0<ESC>
+nnoremap <leader>c o<ESC>cc#endif // if 0<ESC>'aO<ESC>cc#if 0<ESC>
+nnoremap <leader>j <C-W>j
+nnoremap <leader>k <C-W>k
 
 " Moving around buffers
 nnoremap <C-H> <C-W>h
@@ -198,19 +202,19 @@ nnoremap <C-K> 5k
 nnoremap H :w<CR>:bp<CR>
 nnoremap L :w<CR>:bn<CR>
 
-set nocursorcolumn
-set nocursorline
-set norelativenumber
-"syntax sync minlines=256
-
 " Ignore the warnings through make
 set errorformat^=%-G%f:%l:\ warning:%m
 
-nnoremap <leader>f :set foldmethod=syntax<CR>:set foldnestmax=1<CR>
+" Setup the shell for handling dispatching commands 
+set shell=/bin/bash\ -l
+set shellcmdflag=-ic
 
 " Disable youcompleteme
 "let g:loaded_youcompleteme = 1
 
+augroup autoformat_settings
+  autocmd FileType c,cpp AutoFormatBuffer clang-format
+augroup END
+
 " ~/.vimrc ends here
-"
-"
+
