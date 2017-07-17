@@ -114,6 +114,7 @@ map <F9> mn:w <bar> !./vform %:p<CR>:edit!<CR>'nzz
 ":edit!<CR>redraw!<CR>
 
 " Set jk as escape sequence
+" imap jk <Esc>
 imap jk <Esc>
 
 " Miscellaneous
