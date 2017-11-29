@@ -16,6 +16,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'vim-airline/vim-airline'
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
+Plugin 'derekwyatt/vim-fswitch'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -181,7 +182,7 @@ vnoremap <leader>q :ctags -R
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>s :sp<CR>
 nnoremap <leader>g :YcmCompleter GoTo<CR>
-nnoremap <leader>f :FormatCode<CR>
+nnoremap <leader>f :FSHere<CR>
 
 " Better highlighting
 highlight Search ctermbg=black ctermfg=yellow cterm=underline
@@ -211,7 +212,7 @@ set shell=/bin/bash\ -l
 set shellcmdflag=-ic
 
 " Disable youcompleteme
-"let g:loaded_youcompleteme = 1
+let g:loaded_youcompleteme = 1
 
 augroup autoformat_settings
   autocmd FileType c,cpp AutoFormatBuffer clang-format

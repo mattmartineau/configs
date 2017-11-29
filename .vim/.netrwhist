@@ -1,3 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/localhd/mattmar/kernels_o/omp4/27pt_stencil_performance'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/matt/repos/arch/neutral'
+let g:netrw_dirhist_2='/Users/matt/repos/arch/neutral/omp3'
+let g:netrw_dirhist_3='/Users/matt/repos/arch/omp3'
+let g:netrw_dirhist_4='/Users/matt/repos/arch/hal3d/omp3'
+let g:netrw_dirhist_5='/Users/matt/.vim'
+let g:netrw_dirhist_6='/Users/matt/.vim/colors'
+let g:netrw_dirhist_7='/Users/matt/repos/arch/hal3d/cuda'
+let g:netrw_dirhist_8='/Users/matt/repos/arch/tensor-benchmark/cuda'
