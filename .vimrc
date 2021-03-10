@@ -9,15 +9,15 @@ call vundle#begin()
 
 "Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 "Plugin 'tpope/vim-fugitive'
 "Plugin 'tpope/vim-surround'
 "Plugin 'tpope/vim-dispatch'
-"Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
 "Plugin 'google/vim-maktaba'
 "Plugin 'google/vim-codefmt'
 "Plugin 'derekwyatt/vim-fswitch'
-"
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -133,20 +133,24 @@ let fortran_do_enddo=1
 let fortran_more_precise=1
 let fortran_have_tabs=1
 
-augroup autocommands
-  " Clear group
+augroup custom_autocommands
+
+  " Clear the list of autocommands to stop repeats
   au!
-
+  
   " Stops the preview window keep opening all the time
-  au CompleteDone * pclose
-
+  autocmd CompleteDone * pclose
+          
   " Setup special file highlighting
   au BufRead,BufNewFile *.cl set filetype=c
   au BufRead,BufNewFile *.cuknl set filetype=cpp
   au BufRead,BufNewFile *.cu set filetype=cpp
-  au BufRead,BufNewFile *.sycl set filetype=cpp
   au BufRead,BufNewFile *.knls set filetype=cpp
   au BufRead,BufNewFile *.ptx set filetype=asm
+
+  " Setup rwa
+  au BufWritePost *.cpp silent! execute "!rwa %:p &" | redraw!
+  au BufWritePost *.cu silent! execute ":!rwa %:p &" | redraw!
 augroup END
 
 " Permanent undo files
@@ -181,7 +185,6 @@ set wildmenu
 
 " Quick jump to shell
 nnoremap <leader>d :sh<CR>
-vnoremap <leader>p "0p
 vnoremap <leader>q :ctags -R
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>s :sp<CR>
