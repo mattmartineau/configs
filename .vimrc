@@ -7,17 +7,17 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
+"Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-dispatch'
-Plugin 'vim-airline/vim-airline'
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmt'
-Plugin 'derekwyatt/vim-fswitch'
-
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-surround'
+"Plugin 'tpope/vim-dispatch'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'google/vim-maktaba'
+"Plugin 'google/vim-codefmt'
+"Plugin 'derekwyatt/vim-fswitch'
+"
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -50,11 +50,9 @@ function! SKEL_spec()
     exe "%s/specRPM_CREATION_NAME/" . expand("%:t:r") . "/ge"
 endfunction
 autocmd BufNewFile	*.spec	call SKEL_spec()
-if has("vms")
-    set nobackup      " do not keep a backup file, use versions instead
-else
-    set backup        " keep a backup file
-endif
+
+set nobackup      " do not keep a backup file, use versions instead
+set nowritebackup
 
 if has("autocmd")
     filetype plugin indent on
@@ -130,20 +128,26 @@ hi ColorColumn ctermbg=lightgrey
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_extra_conf.py'
 
-" Stops the preview window keep opening all the time
-autocmd CompleteDone * pclose
-        
 " Some Fortran code folding improvements
 let fortran_do_enddo=1
 let fortran_more_precise=1
 let fortran_have_tabs=1
 
-" Setup special file highlighting
-au BufRead,BufNewFile *.cl set filetype=c
-au BufRead,BufNewFile *.cuknl set filetype=cpp
-au BufRead,BufNewFile *.cu set filetype=cpp
-au BufRead,BufNewFile *.knls set filetype=cpp
-au BufRead,BufNewFile *.ptx set filetype=asm
+augroup autocommands
+  " Clear group
+  au!
+
+  " Stops the preview window keep opening all the time
+  au CompleteDone * pclose
+
+  " Setup special file highlighting
+  au BufRead,BufNewFile *.cl set filetype=c
+  au BufRead,BufNewFile *.cuknl set filetype=cpp
+  au BufRead,BufNewFile *.cu set filetype=cpp
+  au BufRead,BufNewFile *.sycl set filetype=cpp
+  au BufRead,BufNewFile *.knls set filetype=cpp
+  au BufRead,BufNewFile *.ptx set filetype=asm
+augroup END
 
 " Permanent undo files
 set undofile
@@ -195,28 +199,43 @@ nnoremap <leader>a ma
 nnoremap <leader>c o<ESC>cc#endif // if 0<ESC>'aO<ESC>cc#if 0<ESC>
 nnoremap <leader>j <C-W>j
 nnoremap <leader>k <C-W>k
+nnoremap <leader>n :cn<CR>
 
 " Moving around buffers
-nnoremap <C-H> <C-W>h
-nnoremap <C-L> <C-W>l
-nnoremap <C-J> 5j
-nnoremap <C-K> 5k
-nnoremap H :w<CR>:bp<CR>
-nnoremap L :w<CR>:bn<CR>
+nnoremap <S-H> <C-W>h
+nnoremap <S-L> <C-W>l
+nnoremap <C-J> <S-J>
+nnoremap <C-K> <S-K>
+nnoremap <C-U> <S-U>
+nnoremap <C-D> <S-D>
+nnoremap <S-U> <C-U>
+nnoremap <S-D> <C-D>
+vnoremap <S-U> <C-U>
+vnoremap <S-D> <C-D>
+nnoremap <S-J> 5j
+nnoremap <S-K> 5k
+"nnoremap <C-H> :w<CR>:bp<CR>
+"nnoremap <C-L> :w<CR>:bn<CR>
 
 " Ignore the warnings through make
 set errorformat^=%-G%f:%l:\ warning:%m
 
 " Setup the shell for handling dispatching commands 
-set shell=/bin/bash\ -l
-set shellcmdflag=-ic
+"set shell=/bin/bash\ -l
+"set shellcmdflag=-ic
 
 " Disable youcompleteme
-let g:loaded_youcompleteme = 1
+"let g:loaded_youcompleteme = 1
 
-augroup autoformat_settings
-  autocmd FileType c,cpp AutoFormatBuffer clang-format
-augroup END
+"augroup autoformat_settings
+"  autocmd FileType c,cpp AutoFormatBuffer clang-format
+"augroup END
+"
+
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 
 " ~/.vimrc ends here
 
