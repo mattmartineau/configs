@@ -1,8 +1,6 @@
+#!/bin/bash
 
-export HOME=${PWD}
-
-cd $HOME
-tmux new-session -d -s matt_session
+tmux new-session -e HOME=${PWD} -d -s matt_session
 
 tmux attach -t matt_session
 
