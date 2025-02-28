@@ -55,5 +55,11 @@ if [ -f "$HOME/.vimrc" ]; then
     vim +PlugInstall +qall
 fi
 
+# # Put something like this in ~/.profile
+# export ROOTDIR=/home/scratch.mmartineau_sw
+# export MYVIMRC="${ROOTDIR}/.vimrc"
+# export VIMINIT='let $MYVIMRC="${ROOTDIR}/.vimrc" | set runtimepath+=${ROOTDIR}/.vim/ | source $MYVIMRC'
+# cd ${ROOTDIR}
+
 echo "Setup completed successfully."
 

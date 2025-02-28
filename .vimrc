@@ -3,18 +3,12 @@ let mapleader=" "
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-call plug#begin('~/.vim/plugged/')
+call plug#begin('./.vim/plugged/')
 
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
-"Plug 'VundleVim/Vundle.vim'
-"Plug 'tpope/vim-dispatch'
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'google/vim-maktaba'
-"Plug 'google/vim-codefmt'
-"Plug 'derekwyatt/vim-fswitch'
 
 call plug#end()
 
